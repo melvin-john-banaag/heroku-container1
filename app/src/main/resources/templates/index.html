@@ -1,0 +1,132 @@
+<html>
+<head>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+			function submitOptOutMsg(){
+				var requestURL = "/api/CUST_optOut_optIn";
+				var msg = $('#optOutMsg').val();
+
+				$.ajax({
+					url: requestURL,
+					data: msg,
+					type: "POST",
+					contentType: "application/json;charset=utf-8",
+					success: function(returnData){
+						alert('done');console.log(returnData);
+					},
+					error: function(xhr, ajaxOptions, thrownError){
+						alert('failed');console.log(xhr.status);
+						console.log(thrownError);
+					}
+				});
+			}
+
+			function submitProductOfferMsg(){
+				var requestURL = "/api/prod_offer";
+				var msg = $('#productOfferMsg').val();
+
+				$.ajax({
+					url: requestURL,
+					data: msg,
+					type: "POST",
+					contentType: "application/json;charset=utf-8",
+					success: function(returnData){
+						alert('done');console.log(returnData);
+					},
+					error: function(xhr, ajaxOptions, thrownError){
+						alert('failed');console.log(xhr.status);
+						console.log(thrownError);
+					}
+				});
+			}
+
+			function submitUpdateEmailMsg(){
+				var requestURL = "/api/cust_update_email";
+				var msg = $('#updateEmailMsg').val();
+
+				$.ajax({
+					url: requestURL,
+					data: msg,
+					type: "POST",
+					contentType: "application/json;charset=utf-8",
+					success: function(returnData){
+						alert('done');console.log(returnData);
+					},
+					error: function(xhr, ajaxOptions, thrownError){
+						alert('failed');console.log(xhr.status);
+						console.log(thrownError);
+					}
+				});
+			}
+
+			$( document ).ready(function() {
+				$('#optOutMsg').val('{"topic":"CUST_optOut_optIn", "desc":"Customer request opt-out/opt-in", "message":{"userId":"U2313532432", ' +
+						'"mobile":98989898, "email":"", "hkId":"", "brand":"csl", "optOut":true}}');
+
+				$('#productOfferMsg').val('{"topic":"PROD_offer", "desc":"New/update product offer",' +
+						'"message":{ "offerId":"O19840328490", "brand":"csl", "type":"new" }}');
+
+				$('#updateEmailMsg').val('{"topic":"CUST_update_email", "desc":"Customer update email address", '+
+						'"message":{ "userId":"U231353674", "oldEmail":"ewjilkfw@netvigator.com", "newEmail":"abcdefg@netvigator.com" } }');
+			});
+		</script>
+</head>
+<body>
+<div class="container">
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <h6>Opt-in/Opt-out for different brand:</h6>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="optOutMsg">Message</label>
+                <textarea class="form-control" id="optOutMsg" rows="4"></textarea>
+            </div>
+            <div class="form-group col-md-3">
+                <button class="btn btn-primary" onClick="submitOptOutMsg(); return false;">Submit</button>
+            </div>
+        </div>
+    </form>
+    <hr/>
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <h6>New/update product offer:</h6>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="productOfferMsg">Message</label>
+                <textarea class="form-control" id="productOfferMsg" rows="4"></textarea>
+            </div>
+            <div class="form-group col-md-3">
+                <button class="btn btn-primary" onClick="submitProductOfferMsg(); return false;">Submit</button>
+            </div>
+        </div>
+    </form>
+    <hr/>
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <h6>Customer update email, notify campaign management system:</h6>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="updateEmailMsg">Message</label>
+                <textarea class="form-control" id="updateEmailMsg" rows="4"></textarea>
+            </div>
+            <div class="form-group col-md-3">
+                <button class="btn btn-primary" onClick="submitUpdateEmailMsg(); return false;">Submit</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>

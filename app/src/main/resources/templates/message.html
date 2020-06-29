@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <span th:if="${message.topic != null}">
+        <p th:text ="'Topic: '+${message.topic} "/>
+        <p th:text ="'Description: '+${message.desc} "/>
+        <span th:if="${message.topic == 'CUST_optOut_optIn'}">
+            <p th:text ="'User ID: '+${message.message.userId} "/>
+            <p th:text ="'Mobile : '+${message.message.mobile} "/>
+            <p th:text ="'Email : '+${message.message.email} "/>
+            <p th:text ="'HK ID : '+${message.message.hkId} "/>
+            <p th:text ="'Brand : '+${message.message.brand} "/>
+            <p th:text ="'Opt Out : '+${message.message.optOut} "/>
+        </span>
+        <span th:if="${message.topic == 'CUST_update_email'}">
+            <p th:text ="'User ID: '+${message.message.userId} "/>
+            <p th:text ="'Old Email : '+${message.message.oldEmail} "/>
+            <p th:text ="'New Email : '+${message.message.newEmail} "/>
+        </span>
+        <span th:if="${message.topic == 'PROD_offer'}">
+            <p th:text ="'Offer ID: '+${message.message.offerId} "/>
+            <p th:text ="'brand : '+${message.message.brand} "/>
+            <p th:text ="'type : '+${message.message.type} "/>
+        </span>
+
+
+    </span>
+    <span th:if="${message.topic == null}"><H1>No Data Passed to API</H1></span>
+</body>
+</html>
